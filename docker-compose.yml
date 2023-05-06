@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  pg:
+    container_name: pg
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - ./postgres:/data/postgres
+    ports:
+      - "5433:5432"
+    restart: always

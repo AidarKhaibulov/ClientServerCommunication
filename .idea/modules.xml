@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ClientServerCommuncation.iml" filepath="$PROJECT_DIR$/ClientServerCommuncation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServerRBAC/ServerRBAC.iml" filepath="$PROJECT_DIR$/ServerRBAC/ServerRBAC.iml" />
+    </modules>
+  </component>
+</project>
