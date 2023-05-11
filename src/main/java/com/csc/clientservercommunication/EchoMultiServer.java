@@ -50,9 +50,9 @@ public class EchoMultiServer {
 
         public void run() {
             try {
-                authorizeUser();
+                String userData=authorizeUser();
 
-                handleUsersRequests();
+                handleUsersRequests(userData);
 
 
 
@@ -61,7 +61,7 @@ public class EchoMultiServer {
             }
         }
 
-        private void authorizeUser() throws IOException {
+        private String authorizeUser() throws IOException {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String credentials;
@@ -73,10 +73,10 @@ public class EchoMultiServer {
                 }
                 out.println("Invalid login or password");
             }
-
-
+            DBHandler db=new DBHandler();
+            return db.getUserData(credentials);
         }
-        private void handleUsersRequests() throws IOException {
+        private void handleUsersRequests(String userData) throws IOException {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String request;
@@ -89,11 +89,12 @@ public class EchoMultiServer {
                         isSessionActive = false;
                         System.out.println("User session is terminated");
                     }
-                    case "help" -> out.println("exit - stop current session");
+                    case "help" -> out.println("exit - stop current session*select <table_name> - fetch all data");
                     case "select","insert","delete"->{
-                        String result =executeQueryToDB(requestParams);
+                        String result =executeQueryToDB(requestParams,userData);
                         out.println(result);
                     }
+                    default -> out.print("Unknown command");
                 }
 
             }
@@ -102,9 +103,25 @@ public class EchoMultiServer {
             clientSocket.close();
         }
 
-        private String executeQueryToDB(String[] requestParams) {
+        private String executeQueryToDB(String[] requestParams,String userData) {
+            AccessHandler accessHandler= new AccessHandler();
             DBHandler db= new DBHandler();
-            return db.selectData(requestParams[1]);
+            switch (requestParams[0]){
+                case "select"-> {
+                    accessHandler.isUserHaveAccessToTable(userData,requestParams[1]);
+                    return db.selectData(requestParams[1]);
+                }
+                case "insert" -> {
+                    return db.insertData(requestParams[1],requestParams[2],requestParams[3],requestParams[4]);
+                }
+                case "delete" -> {
+                    return db.deleteData(requestParams[1],requestParams[2]);
+                }
+                default -> {
+                    return "error while executing user queries";
+                }
+            }
+
         }
     }
 

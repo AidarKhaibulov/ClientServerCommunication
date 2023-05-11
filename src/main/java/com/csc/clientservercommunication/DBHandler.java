@@ -26,9 +26,8 @@ public class DBHandler {
         return connection;
     }
     public String selectData(String table){
-        Connection conn= connect();
         PreparedStatement stmt ;
-        try {
+        try (Connection conn= connect()){
             stmt = conn.prepareStatement("SELECT * FROM " +table);
             ResultSet rs = stmt.executeQuery();
             StringBuilder result=new StringBuilder();
@@ -36,14 +35,59 @@ public class DBHandler {
                 result.append(rs.getInt("id")+
                         rs.getString("name")+ rs.getString("value")+"*");
             }
-            conn.close();
             return result.toString();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+    public String  insertData(String table,String id, String name, String value) {
+        PreparedStatement stmt ;
+        try (Connection conn= connect()){
+            stmt = conn.prepareStatement("insert into "+table+" values ("+id+",'"+name+"',"+value+")");
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return "Data inserted!";
+    }
+
     public boolean authorizeUser(String credentials){
-       //TODO: return checking user authorization
+        String login=credentials.split(" ")[0];
+        String password=credentials.split(" ")[1];
+
+        PreparedStatement stmt ;
+        try (Connection conn= connect()){
+            stmt = conn.prepareStatement("select * from users where login='"+login +"' and password='"+ password+"'");
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next())
+                return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return false;
+    }
+    public String getUserData(String credentials){
+        String login=credentials.split(" ")[0];
+        String password=credentials.split(" ")[1];
+
+        PreparedStatement stmt ;
+        try (Connection conn= connect()){
+            stmt = conn.prepareStatement("select * from users where login='"+login +"' and password='"+ password+"'");
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return rs.getString("role");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public String deleteData(String table, String id) {
+        PreparedStatement stmt ;
+        try (Connection conn= connect()){
+            stmt = conn.prepareStatement("delete from "+table+" where id='"+id+"'");
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return "Data deleted!";
     }
 }
