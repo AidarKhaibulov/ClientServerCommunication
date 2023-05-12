@@ -66,7 +66,7 @@ public class DBHandler {
         }
         return false;
     }
-    public String getUserData(String credentials){
+    public String[] getUserData(String credentials){
         String login=credentials.split(" ")[0];
         String password=credentials.split(" ")[1];
 
@@ -75,7 +75,11 @@ public class DBHandler {
             stmt = conn.prepareStatement("select * from users where login='"+login +"' and password='"+ password+"'");
             ResultSet rs = stmt.executeQuery();
             rs.next();
-            return rs.getString("role");
+            String[] res = new String[3];
+            res[0]=rs.getString("role");
+            res[1]=rs.getString("dac");
+            res[2]=rs.getString("mac");
+            return res;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
