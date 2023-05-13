@@ -378,15 +378,7 @@ E
 postgres/base/4/13383,c\3\c3785713b5b38a9a5cdddd416cec7058e326db6d
 E
 postgres/base/4/13378,b\e\beeacae32c5054e4aaf6605ff95b0f760a7891b0
-S
-#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
 r
 Bsrc/main/java/com/csc/clientservercommunication/Authenticator.java,6\d\6d93f0e7d2d680eb367a4d9fd29d13af4f85ca7d
-]
--.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
-u
-Esrc/main/java/com/csc/clientservercommunication/AccessController.java,7\2\722057e0725a337e0fba73e78ef0b24a3d7800ec
 B
 docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
-h
-8src/main/java/com/csc/clientservercommunication/MAC.java,4\c\4cfb005fb9590c8c57bf305a4805ebf3d4f75e6d

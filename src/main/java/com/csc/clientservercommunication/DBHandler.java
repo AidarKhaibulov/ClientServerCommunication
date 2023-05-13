@@ -32,8 +32,8 @@ public class DBHandler {
             ResultSet rs = stmt.executeQuery();
             StringBuilder result=new StringBuilder();
             while (rs.next()) {
-                result.append(rs.getInt("id")+
-                        rs.getString("name")+ rs.getString("value")+"*");
+                result.append(rs.getInt("id")+" "+
+                        rs.getString("name")+" "+ rs.getString("value")+"*");
             }
             return result.toString();
         } catch (SQLException e) {
@@ -93,5 +93,25 @@ public class DBHandler {
             throw new RuntimeException(e);
         }
         return "Data deleted!";
+    }
+
+    public void setMAC(String username, String authority) {
+        String query="UPDATE users SET mac = '"+ authority +"' WHERE login = '"+ username +"'";
+        setUserFiled(query);
+    }
+
+    public void setRBAC(String username, String authority) {
+        String query="UPDATE users SET role = '"+ authority +"' WHERE login = '"+ username +"'";
+        setUserFiled(query);
+    }
+
+    private void setUserFiled(String query) {
+        PreparedStatement stmt ;
+        try (Connection conn= connect()){
+            stmt = conn.prepareStatement(query);
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

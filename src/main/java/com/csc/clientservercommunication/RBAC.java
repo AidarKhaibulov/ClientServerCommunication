@@ -29,4 +29,15 @@ public class RBAC implements AccessController {
                     || method.equals("select");
         }
     }
+
+    @Override
+    public boolean canGrant(String authority, String userData) {
+        return userData.equals("ADMIN");
+    }
+
+    @Override
+    public void grantAuthorityToUser(String username, String authority) {
+        DBHandler db = new DBHandler();
+        db.setRBAC(username,authority);
+    }
 }

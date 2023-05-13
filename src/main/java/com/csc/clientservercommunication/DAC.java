@@ -1,6 +1,5 @@
 package com.csc.clientservercommunication;
 
-import java.util.Arrays;
 
 public class DAC implements AccessController{
     @Override
@@ -28,6 +27,28 @@ public class DAC implements AccessController{
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean canGrant(String authority, String userData) {
+        String[] curTablesInfo= userData.split(",");
+        String curTableAccessInfo = "";
+        for(String tableInfo:curTablesInfo){
+            if(tableInfo.charAt(0)==authority.charAt(0)){
+                curTableAccessInfo=tableInfo;
+                break;
+            }
+        }
+        // if current user has no access to assigning table
+        if(curTableAccessInfo.equals(""))
+            return false;
+
+        //todo: realize checking granting ability and grant mechanism
+    }
+
+    @Override
+    public void grantAuthorityToUser(String username, String authority) {
+
     }
 
 }
