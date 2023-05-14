@@ -16,7 +16,7 @@ public class Server {
         2 - MAC
         3 - RBAC
      */
-    private static final int accessHandleType = 1;
+    private static final int accessHandleType = 3;
     private static final Logger LOG = LoggerFactory.getLogger(Server.class);
 
     private ServerSocket serverSocket;
@@ -101,6 +101,7 @@ public class Server {
                 Authenticator authenticator = new Authenticator(credentials);
                 if (authenticator.isCredentialsValid(credentials)) {
                     out.println("Authorization complete!");
+                    LOG.info("{} authorized!",credentials.split(" ")[0]);
                     break;
                 }
                 out.println("Invalid login or password");

@@ -157,6 +157,8 @@ COPY public.users (id, login, password, role, dac, mac) FROM stdin;
 1	bob	111	R1	1100,2000	NA
 5	ivan	322	ADMIN	1000,2000	admin
 4	liza	321	R1	1000,2000	top_secret
+6   agasfer 666 D2 1111,2111 NA
+7   esfir 122 ADMIN 1000,2111 NA
 \.
 
 
