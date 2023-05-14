@@ -369,8 +369,6 @@ E
 E
 postgres/base/4/13378,b\e\beeacae32c5054e4aaf6605ff95b0f760a7891b0
 o
-?src/main/java/com/csc/clientservercommunication/EchoClient.java,4\5\4563c8a1a3510740804e92352977c04ca7da28a8
-o
 ?src/main/java/com/csc/clientservercommunication/EchoServer.java,8\2\82706e3cae52861973f45101fe367d87adbb0cbc
 p
 @src/main/java/com/csc/clientservercommunication/GreetServer.java,3\b\3b6ea1a1ace1fb15e35148e8849c126809124d0d
@@ -382,3 +380,7 @@ r
 Bsrc/main/java/com/csc/clientservercommunication/Authenticator.java,6\d\6d93f0e7d2d680eb367a4d9fd29d13af4f85ca7d
 B
 docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
+u
+Esrc/main/java/com/csc/clientservercommunication/AccessController.java,7\2\722057e0725a337e0fba73e78ef0b24a3d7800ec
+h
+8src/main/java/com/csc/clientservercommunication/MAC.java,4\c\4cfb005fb9590c8c57bf305a4805ebf3d4f75e6d

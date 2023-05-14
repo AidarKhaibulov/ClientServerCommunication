@@ -43,12 +43,20 @@ public class DAC implements AccessController{
         if(curTableAccessInfo.equals(""))
             return false;
 
-        //todo: realize checking granting ability and grant mechanism
+        // 10__ - new data
+        // 1101 - old data
+        // checking if cur user has access to the levels provided in new data
+        for (int i = 1; i < authority.length(); i++) {
+            if(authority.charAt(i)!='_' && curTableAccessInfo.charAt(i)!='1')
+                return false;
+        }
+        return true;
     }
 
     @Override
     public void grantAuthorityToUser(String username, String authority) {
-
+        DBHandler db = new DBHandler();
+        db.setDAC(username,authority);
     }
 
 }
